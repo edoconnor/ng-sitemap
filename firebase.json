@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/geomap",
+    "public": "dist/ng-sitemap",
     "ignore": [
       "firebase.json",
       "**/.*",
