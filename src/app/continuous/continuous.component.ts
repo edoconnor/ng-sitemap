@@ -4,7 +4,6 @@ import { LocationService } from '../location.service';
 import { map } from 'rxjs/operators';
 import 'leaflet/dist/leaflet.css';
 import * as L from 'leaflet';
- 
 
 @Component({
   selector: 'app-continuous',
@@ -18,7 +17,7 @@ export class ContinuousComponent implements OnInit {
   constructor(private locationService: LocationService) {}
 
   ngOnInit() {
-    const fixedLocation = L.latLng(42.366028, -71.057584);
+    const fixedLocation = L.latLng(42.36578, -71.0575);
     this.initMap(fixedLocation);
 
     this.getPosition().subscribe(
@@ -33,71 +32,50 @@ export class ContinuousComponent implements OnInit {
     );
   }
 
+  feastZone: any = {
+    type: 'Feature',
+    geometry: {
+      type: 'Polygon',
+      coordinates: [
+        [
+          [-71.0583944, 42.3668472, 0.0],
+          [-71.0582174, 42.3652618, 0.0],
+          [-71.0581369, 42.3644294, 0.0],
+          [-71.0566242, 42.3645048, 0.0],
+          [-71.0566778, 42.3650874, 0.0],
+          [-71.0567207, 42.3653014, 0.0],
+          [-71.05671, 42.3653847, 0.0],
+          [-71.0566671, 42.3654521, 0.0],
+          [-71.0563345, 42.3656859, 0.0],
+          [-71.0568173, 42.3659634, 0.0],
+          [-71.057107, 42.3661298, 0.0],
+          [-71.0572035, 42.3662289, 0.0],
+          [-71.0577292, 42.3668195, 0.0],
+          [-71.058035, 42.3671722, 0.0],
+          [-71.0583944, 42.3668472, 0.0],
+        ],
+      ],
+    },
+  };
+
   markerIcon = L.icon({
     iconUrl: '/assets/circle.png',
     iconSize: [24, 24],
   });
 
-  canopyIcon = L.icon({
-    iconUrl: '/assets/stall2.png',
-    iconSize: [24, 24],
-  });
-
-  canopy2Icon = L.icon({
-    iconUrl: '/assets/stall2.png',
-    iconSize: [24, 24],
-  });
-
-  canopy3Icon = L.icon({
-    iconUrl: '/assets/stall3.png',
-    iconSize: [24, 24],
-  });
-
-  tentIcon = L.icon({
-    iconUrl: '/assets/tent.png',
-    iconSize: [32, 32],
-  });
-
-  stageIcon = L.icon({
-    iconUrl: '/assets/stage2.png',
-    iconSize: [36, 36],
-  });
-
-  canopyLocation = L.latLng(42.36634, -71.05794);
-  canopy2Location = L.latLng(42.366335, -71.057815);
-  canopy3Location = L.latLng(42.36628, -71.057775);
-  tentLocation = L.latLng(42.366, -71.05765);
-  stageLocation = L.latLng(42.36595, -71.057405);
-
   initMap(fixedLocation: L.LatLng) {
-    this.map = L.map('map').setView(fixedLocation, 19);
+    this.map = L.map('map').setView(fixedLocation, 18);
     L.tileLayer(
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png',
       {
-        minZoom: 18,
+        minZoom: 14,
         maxNativeZoom: 20,
         maxZoom: 20,
         crossOrigin: true,
       }
     ).addTo(this.map);
+    L.geoJSON(this.feastZone).addTo(this.map);
     this.marker = L.marker([0, 0], { icon: this.markerIcon }).addTo(this.map);
-    const tentMarker = L.marker(this.tentLocation, {
-      icon: this.tentIcon,
-    }).addTo(this.map);
-    const stageMarker = L.marker(this.stageLocation, {
-      icon: this.stageIcon,
-    })
-      .bindPopup("I'm a popup too!")
-      .addTo(this.map);
-    const canopyMarker = L.marker(this.canopyLocation, {
-      icon: this.canopyIcon,
-    }).addTo(this.map);
-    const canopy2Marker = L.marker(this.canopy2Location, {
-      icon: this.canopy2Icon,
-    }).addTo(this.map);
-    const canopy3Marker = L.marker(this.canopy3Location, {
-      icon: this.canopy3Icon,
-    }).addTo(this.map);
 
     this.getPosition().subscribe(
       (position) => {

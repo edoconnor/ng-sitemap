@@ -69,9 +69,9 @@ export class GeomapComponent implements OnInit {
 
 
   initMap(latLng: L.LatLng) {
-    const map = L.map('map').setView(latLng, 18);
+    const map = L.map('map').setView(latLng, 10);
     L.tileLayer('https://retina-tiles.p.rapidapi.com/local/osm{r}/v1/{z}/{x}/{y}.png?rapidapi-key=839febf5e9msh4f0bd2b2b0c8404p1587b4jsn4d7cc445eda5', {
-      minZoom: 18,
+      minZoom: 10,
       maxNativeZoom: 20,
       maxZoom: 20,
       crossOrigin: true,
