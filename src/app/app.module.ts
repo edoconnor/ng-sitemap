@@ -7,13 +7,15 @@ import { GeomapComponent } from './geomap/geomap.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { ContinuousComponent } from './continuous/continuous.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GeomapComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ContinuousComponent
   ],
   imports: [
     BrowserModule,
