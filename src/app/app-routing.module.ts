@@ -4,8 +4,7 @@ import { GeomapComponent } from './geomap/geomap.component';
 import { ContinuousComponent } from './continuous/continuous.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'map', pathMatch: 'full' },
-  { path: 'map', component: GeomapComponent },
+  { path: '', redirectTo: 'update', pathMatch: 'full' },
   { path: 'update', component: ContinuousComponent },
 ];
 
