@@ -4,11 +4,13 @@ import { LocationService } from '../location.service';
 import { map } from 'rxjs/operators';
 import 'leaflet/dist/leaflet.css';
 import * as L from 'leaflet';
+ 
 
 @Component({
   selector: 'app-continuous',
   templateUrl: './continuous.component.html',
   styleUrls: ['./continuous.component.css'],
+  
 })
 export class ContinuousComponent implements OnInit {
   map: L.Map | null = null;
@@ -58,10 +60,13 @@ export class ContinuousComponent implements OnInit {
     },
   };
 
-  markerIcon = L.icon({
-    iconUrl: '/assets/circle.png',
-    iconSize: [24, 24],
-  });
+  animatedCircleIcon = {
+    icon: L.divIcon({
+      className: 'css-icon',
+      html: '<div class="gps_ring"></div>',
+      iconSize: [18, 22],
+    }),
+  };
 
   initMap(fixedLocation: L.LatLng) {
     this.map = L.map('map').setView(fixedLocation, 18);
@@ -75,8 +80,8 @@ export class ContinuousComponent implements OnInit {
       }
     ).addTo(this.map);
     L.geoJSON(this.feastZone).addTo(this.map);
-    this.marker = L.marker([0, 0], { icon: this.markerIcon }).addTo(this.map);
-
+    // this.marker = L.marker([0, 0], { icon: this.markerIcon }).addTo(this.map);
+    this.marker = L.marker([0,0], this.animatedCircleIcon).addTo(this.map);
     this.getPosition().subscribe(
       (position) => {
         const latLng = L.latLng(position.latitude, position.longitude);
